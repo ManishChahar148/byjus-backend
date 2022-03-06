@@ -1,9 +1,21 @@
-import User from "./schema/user";
+// import User from "./schema/user";
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
+
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const user = new Schema({
+	name:String,
+	email:{type:String,unique:true},
+	address : String,
+    joiningDate: String,
+    isDeleted: {type: Boolean, default:false}
+});
+
+const User = mongoose.model('user',user);
 
 let app = express();
 app.use(cors({ origin: 'https://byjus-frontend-manish.herokuapp.com'}));

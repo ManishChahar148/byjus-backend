@@ -1,20 +1,33 @@
 "use strict";
 
-var _user = _interopRequireDefault(require("./schema/user"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+// import User from "./schema/user";
 const express = require("express");
 
 const cors = require("cors");
 
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser"); // const mongoose = require("mongoose");
 
-const mongoose = require("mongoose");
 
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
+const user = new Schema({
+  name: String,
+  email: {
+    type: String,
+    unique: true
+  },
+  address: String,
+  joiningDate: String,
+  isDeleted: {
+    type: Boolean,
+    default: false
+  }
+});
+const User = mongoose.model('user', user);
 let app = express();
 app.use(cors({
-  origin: 'http://localhost:3000'
+  origin: 'https://byjus-frontend-manish.herokuapp.com'
 })); // app.use(bodyParser.json());
 
 app.use(bodyParser.json({
@@ -26,8 +39,7 @@ app.use(bodyParser.urlencoded({
   extended: true
 })); // connect mongoose to mongodb
 
-mongoose.connect("mongodb://localhost/byjus", {
-  // useCreateIndex :true,
+mongoose.connect("mongodb+srv://manish:manish123@cluster0.3ucdb.mongodb.net/byjus?retryWrites=true&w=majority", {
   useNewUrlParser: true
 }); // listening to 7000
 
@@ -35,7 +47,7 @@ app.listen(7000, function () {
   console.log("listening to port : 7000");
 });
 app.get("/all-users", async (req, res) => {
-  const users = await _user.default.find({
+  const users = await User.find({
     isDeleted: false
   });
   return res.json({
@@ -48,7 +60,7 @@ app.post("/create-user", async (req, res) => {
   let x;
 
   try {
-    x = await _user.default.create(userData);
+    x = await User.create(userData);
   } catch (err) {
     return res.status(500).json({
       success: false,
@@ -65,7 +77,7 @@ app.delete("/remove-user/:userId", async (req, res) => {
   const userId = req.params.userId;
 
   try {
-    await _user.default.deleteOne({
+    await User.deleteOne({
       _id: userId
     });
   } catch (err) {
