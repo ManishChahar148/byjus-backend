@@ -30,7 +30,7 @@ mongoose.connect("mongodb+srv://manish:manish123@cluster0.3ucdb.mongodb.net/byju
 
 // listening to 7000
 app.listen(process.env.PORT || 7000, function () {
-  console.log("listening to port : 7000");
+  console.log("listening to port : ", process.env.PORT);
 });
 
 app.get("/all-users", async (req, res) => {
