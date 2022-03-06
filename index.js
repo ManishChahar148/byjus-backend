@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 let app = express();
-app.use(cors({ origin: 'http://localhost:3000'}));
+app.use(cors({ origin: 'https://byjus-frontend-manish.herokuapp.com'}));
 // app.use(bodyParser.json());
 app.use(bodyParser.json({ limit: "100mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
