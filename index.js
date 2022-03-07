@@ -18,7 +18,7 @@ const user = new Schema({
 const User = mongoose.model('user',user);
 
 let app = express();
-app.use(cors({ origin: 'https://byjus-frontend-manish.herokuapp.com'}));
+app.use(cors({ origin: 'http://localhost:3000'}));
 // app.use(bodyParser.json());
 app.use(bodyParser.json({ limit: "100mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
@@ -29,8 +29,8 @@ mongoose.connect("mongodb+srv://manish:manish123@cluster0.3ucdb.mongodb.net/byju
 });
 
 // listening to 7000
-app.listen(process.env.PORT || 7000, function () {
-  console.log("listening to port : ", process.env.PORT);
+app.listen(7000, function () {
+  console.log("listening to port : ",7000);
 });
 
 app.get("/all-users", async (req, res) => {

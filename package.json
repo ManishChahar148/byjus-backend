@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node dist/index.js",
-    "start": "nodemon dist/index.js",
-    "dev": "nodemon dist/index.js"
+    "build": "nodemon index.js",
+    "start": "nodemon index.js",
+    "dev": "nodemon index.js"
   },
   "author": "Manish Chahar",
   "license": "ISC",
